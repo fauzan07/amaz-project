@@ -1,0 +1,14 @@
+.bg-blue{
+    background-color: #fff;
+}
+
+.navbar h1 {
+    font-weight: 400;
+    font-size: 20px;
+    color: #fff;
+}
+
+a.nav-signout{
+    text-decoration: none;
+    cursor: pointer;
+}

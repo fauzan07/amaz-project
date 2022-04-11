@@ -1,0 +1,87 @@
+html {scroll-behavior: smooth;}
+body{
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    /* padding-top: 50px; */
+    line-height: 1.5;
+    background-color: #f8f9fa!important;
+}
+
+.phase-ui{
+  padding-top: 50px;
+}
+
+.wrapper{
+    padding-top: 60px;
+}
+
+.main{
+    margin-left: 300px; 
+    padding: 0px 5px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 600;
+    line-height: 1.5;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: none;
+    color: #000;
+}
+h1, .h1 {font-size: 1.9em;}
+h2, .h2 {font-size: 1.7em;}
+h3, .h3 {font-size: 1.15em;}
+h4, .h4 {font-size: 1.12em;}
+h5, h6, .h5, .h6{font-size: 0.9em; }
+
+p,li {color: #666; font-size: 0.9em;}
+a {color: #444; text-decoration: none;  transition: 0.3s;}
+
+.btn-primary{
+    background-color:#f99a2d;
+}
+
+.text-primary{
+    color:#f99a2d !important;
+}
+
+.btn-outline-primary{
+    color:#f99a2d;
+    border: 1px solid #f99a2d;
+    font-size: 0.8em;
+}
+
+.btn-outline-primary:hover{
+    background-color: #f99a2d;
+}
+
+::placeholder{
+    font-size: 0.9em;
+}
+
+.bg-border-btm{
+    /* background: #111213; */
+    border-bottom: 3px solid #f99a2d;
+  }
+
+a.nav-drop-ref{
+    text-decoration: none;
+    cursor: pointer;
+    color: #000;
+}
+
+tr,th,td {
+    font-size: 0.9em;
+}
+
+label{
+    font-size: 0.9em;
+}
+
+option{
+    font-size: 0.9em;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #f99a2d;
+}
