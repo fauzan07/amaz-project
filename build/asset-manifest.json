@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.737c5655.css",
-    "main.js": "/static/js/main.553f0cec.js",
+    "main.js": "/static/js/main.583316ae.js",
     "static/js/787.469cba17.chunk.js": "/static/js/787.469cba17.chunk.js",
     "static/media/kido-logo.jpg": "/static/media/kido-logo.e539b6fab7b25c53c1f7.jpg",
     "static/media/kido-logo.png": "/static/media/kido-logo.e539b6fab7b25c53c1f7.png",
     "index.html": "/index.html",
     "main.737c5655.css.map": "/static/css/main.737c5655.css.map",
-    "main.553f0cec.js.map": "/static/js/main.553f0cec.js.map",
+    "main.583316ae.js.map": "/static/js/main.583316ae.js.map",
     "787.469cba17.chunk.js.map": "/static/js/787.469cba17.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.737c5655.css",
-    "static/js/main.553f0cec.js"
+    "static/js/main.583316ae.js"
   ]
 }

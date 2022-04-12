@@ -154,7 +154,9 @@ function Home(props) {
       
                               // console.log(fin_arr);
                               JSONToCSVConvertor(fin_arr,"",["Phrase","Count","Strength"]);
-                              console.log(count,strnt);
+                            //   console.log(count,strnt);
+                            // alert()
+                            window.location.reload();
                           }
                           reader.readAsText($("#fileUpload")[0].files[0]);
                       } else {
@@ -183,7 +185,7 @@ function Home(props) {
                               var strnt = 0;
                               // let words = [];
                               let wphr = "";
-                              var excld_arr = $("#phrase2-value").val().split(" ");
+                              var excld_arr = $("#phrase2-value").val().split("\n");
                               var fin_arr = [];
                               var flds = [];
                               console.log(excld_arr);
@@ -213,6 +215,7 @@ function Home(props) {
       
                               });
                               JSONToCSVConvertor(fin_arr,"",flds);
+                              window.location.reload();
                           }
                           reader.readAsText($("#fileUploadp2")[0].files[0]);
                       } else {
