@@ -20,6 +20,14 @@ function Home(props) {
         var current_path = fileName.split("\\").pop();
         $('.custom-file-labelp2').html(current_path);
     }
+
+    function getPhase4FIleName(e) {
+        //get the file name
+        var fileName = e.target.value;
+        //replace the "Choose a file" label
+        var current_path = fileName.split("\\").pop();
+        $('.custom-file-labelp4').html(current_path);
+    }
       
     //   $('#fileUploadp2').on('change',function(){
     //     //get the file name
@@ -225,6 +233,10 @@ function Home(props) {
                       alert("Please upload a valid CSV file.");
                   }
           }
+
+          const getPhase4Data = () => {
+
+          }
       
           function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
               //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
@@ -315,12 +327,12 @@ function Home(props) {
                                 <a className="nav-link" id="pills-phase2-tab" data-toggle="pill" href="#pills-phase2" role="tab" aria-controls="pills-phase2" aria-selected="false">Phase 2</a>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <a className="nav-link" id="pills-phase3-tab" data-toggle="pill" href="#pills-phase3" role="tab" aria-controls="pills-phase3" aria-selected="false">Phase 3</a>
+                                <a className="nav-link" id="pills-phase3-tab" data-toggle="pill" href="#pills-phase3" role="tab" aria-controls="pills-phase3" aria-selected="false">Phase 4</a>
                             </li>
                             </ul>
                             <div className="tab-content" id="pills-tabContent">
                             <div className="tab-pane fade show active" id="pills-phase1" role="tabpanel" aria-labelledby="pills-phase1-tab">
-                                <div className="phase1 border p-4 shadow">
+                                <div className="phase1 border p-4 bg-white shadow">
                                     <h2 className="text-primary">Phase 1</h2>
                                     <div className="input-phase1 mb-4">
                                         <div className="form-group">
@@ -335,7 +347,7 @@ function Home(props) {
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="pills-phase2" role="tabpanel" aria-labelledby="pills-phase2-tab">
-                                <div className="phase2 border p-4 shadow">
+                                <div className="phase2 border p-4 bg-white shadow">
                                     <h2 className="text-primary">Phase 2</h2>
                                     <div className="input-phase2 mb-4">
                                         <div className="form-group">
@@ -355,7 +367,97 @@ function Home(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="tab-pane fade" id="pills-phase3" role="tabpanel" aria-labelledby="pills-phase3-tab">...</div>
+                            <div className="tab-pane fade" id="pills-phase3" role="tabpanel" aria-labelledby="pills-phase3-tab">
+                            <div className="phase2 border p-4 mb-5 bg-white shadow">
+                                    <h2 className="text-primary">Phase 4</h2>
+                                    <div className="input-phase4 mb-4">
+                                        <div className="form-row">
+                                            <div className="form-group col-md-6">
+                                            <label htmlFor="sel_type">Select Type</label>
+                                                <select id="sel_type" className="form-control">
+                                                    <option selected>Choose type</option>
+                                                    <option value="Manual">Manual</option>
+                                                    <option value="Automation">Automation</option>
+                                                </select>
+                                            </div>
+                                            <div className="form-group col-md-6">
+                                            <label htmlFor="sel_Campaigns">Select Campaigns</label>
+                                                <select id="sel_Campaigns" className="form-control">
+                                                    <option selected>Choose Campaigns</option>
+                                                    <option value="Sponsored Products Campaigns">Sponsored Products Campaigns</option>
+                                                    <option value="Sponsored Display Campaigns">Sponsored Display Campaigns</option>
+                                                    <option value="Sponsored Brands Campaigns">Sponsored Brands Campaigns</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="cam_name">Enter Campaign Name</label>
+                                            <input type="text" className="form-control" id="cam_name" placeholder="Enter Campaign Name"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="daily_budg">Enter Daily Budget</label>
+                                            <input type="text" className="form-control" id="daily_budg" placeholder="Enter Daily Budget"/>
+                                        </div>
+                                        <div className="form-row">
+                                            <div className="form-group col-lg-4">
+                                                <label htmlFor="sku">Enter SKU</label>
+                                                <input type="text" className="form-control" id="sku" placeholder="Enter SKU"/>
+                                            </div>
+                                            <div className="form-group col-lg-4">
+                                                <label htmlFor="ad_grp">Enter Ad Group</label>
+                                                <input type="text" className="form-control" id="ad_grp" placeholder="Enter Ad Group"/>
+                                            </div>
+                                            <div className="form-group col-lg-4">
+                                                <label htmlFor="def_bid">Enter Default Bid</label>
+                                                <input type="text" className="form-control" id="def_bid" placeholder="Enter Default Bid"/>
+                                            </div>
+                                        </div>
+                                        <div className="form-row">
+                                            <div className="form-group col-lg-4">
+                                                <label htmlFor="mat_type">Select Match Type</label>
+                                                <select id="mat_type" className="form-control">
+                                                        <option selected>Choose Match Type</option>
+                                                        <option value="Broad">Broad</option>
+                                                        <option value="Exact">Exact</option>
+                                                        <option value="Phrase">Phrase</option>
+                                                    </select>
+                                            </div>
+                                            <div className="form-group col-lg-4">
+                                                <label htmlFor="bid_strg">Select Bidding Strategy</label>
+                                                    <select id="bid_strg" className="form-control">
+                                                        <option selected>Choose Bidding Strategy</option>
+                                                        <option value="Broad">Fixed Bid</option>
+                                                        <option value="Exact">Dynamic Bid(downword only)</option>
+                                                        <option value="Phrase">Dynamic Bid(Upword only)</option>
+                                                    </select>
+                                            </div>
+                                            <div className="form-group col-lg-4">
+                                                <label htmlFor="placement">Select Placement</label>
+                                                <select id="placement" className="form-control">
+                                                    <option selected>Choose Placement</option>
+                                                    <option value="Top Search">Top Search</option>
+                                                    <option value="product Search">Product Search</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                      
+                                        <div className="form-group">
+                                            <label htmlFor="percentage">Enter Percentage</label>
+                                            <input type="text" className="form-control" id="percentage" placeholder="Enter Percentage"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="exampleInputPassword1">Enter CSV Url</label>
+                                            <div className="custom-file">
+                                                <input type="file" className="custom-file-input" id="fileUploadp4" onChange={getPhase4FIleName}/>
+                                                <label className="custom-file-label custom-file-labelp4" htmlFor="fileUploadp4">Choose file</label>
+                                                <button type="button" id="uploadp4" onClick={getPhase4Data} className="btn btn-sm btn-success my-3">Generate CSV File</button>
+                                                <div id="dvCSV">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
