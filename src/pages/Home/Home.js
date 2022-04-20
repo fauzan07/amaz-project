@@ -394,9 +394,15 @@ function Home(props) {
                                             <label htmlFor="cam_name">Enter Campaign Name</label>
                                             <input type="text" className="form-control" id="cam_name" placeholder="Enter Campaign Name"/>
                                         </div>
-                                        <div className="form-group">
-                                            <label htmlFor="daily_budg">Enter Daily Budget</label>
-                                            <input type="text" className="form-control" id="daily_budg" placeholder="Enter Daily Budget"/>
+                                        <div className="form-row">
+                                            <div className="form-group col-lg-6">
+                                                <label htmlFor="daily_budg">Enter Daily Budget</label>
+                                                <input type="text" className="form-control" id="daily_budg" placeholder="Enter Daily Budget"/>
+                                            </div>
+                                            <div className="form-group col-lg-6">
+                                                <label htmlFor="ad_grp">Enter Ad Group</label>
+                                                <input type="text" className="form-control" id="ad_grp" placeholder="Enter Ad Group"/>
+                                            </div>
                                         </div>
                                         <div className="form-row">
                                             <div className="form-group col-lg-4">
@@ -404,12 +410,12 @@ function Home(props) {
                                                 <input type="text" className="form-control" id="sku" placeholder="Enter SKU"/>
                                             </div>
                                             <div className="form-group col-lg-4">
-                                                <label htmlFor="ad_grp">Enter Ad Group</label>
-                                                <input type="text" className="form-control" id="ad_grp" placeholder="Enter Ad Group"/>
+                                                <label htmlFor="def_bid">Enter Ad Group Default Bid</label>
+                                                <input type="text" className="form-control" id="def_bid" placeholder="Enter Ad Group"/>
                                             </div>
                                             <div className="form-group col-lg-4">
-                                                <label htmlFor="def_bid">Enter Default Bid</label>
-                                                <input type="text" className="form-control" id="def_bid" placeholder="Enter Default Bid"/>
+                                                <label htmlFor="bid">Enter Default Bid</label>
+                                                <input type="text" className="form-control" id="bid" placeholder="Enter Default Bid"/>
                                             </div>
                                         </div>
                                         <div className="form-row">
