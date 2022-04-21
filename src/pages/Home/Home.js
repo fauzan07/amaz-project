@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import $ from 'jquery';
 
@@ -234,8 +234,215 @@ function Home(props) {
                   }
           }
 
-          const getPhase4Data = () => {
+          const [camName, setCamName] = useState("");
+          const [adGropup, setAdGropup] = useState("");
+          const [targetType, setTargetType] = useState("");
+          const [dailyBudg, setDailyBudg] = useState("");
+          const [skuRate, setSkuRate] = useState("");
+          const [defBid, setDefBid] = useState("");
+          const [bidRate, setBidRate] = useState("");
+          const [matchType, setMatchType] = useState("");
+          const [bidStrgy, setBidStrgy] = useState("");
+          const [placementName, setPlacementName] = useState("");
+          const [percentageNo, setPercentageNo] = useState("");
 
+
+
+
+          const getPhase4Data = () => {
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+            if (regex.test($("#fileUploadp3").val().toLowerCase())) {
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+        
+                        var sel_type = "";
+                        var sel_Campaigns = camName;
+                        var ad_grp = adGropup;
+                        var trgt_type = targetType;
+                        var daily_budg = dailyBudg;
+                        var sku = skuRate;
+                        var def_bid = defBid;
+                        var bid = bidRate;
+                        var mat_type = matchType;
+                        var bid_strg = bidStrgy;
+                        var placement = placementName;
+                        var percentage = percentageNo;
+                        var strt_dt = "20220414";
+        
+                        var def_rows = [
+                            "Campaign",
+                            "Ad group",
+                            "Product Ad"
+                        ];
+        
+                        var flds =  [
+                            "Product",
+                            "Entity",
+                            "Operation",
+                            "Campaign Id",
+                            "Ad Group Id",
+                            "Portfolio Id",
+                            "Ad Id",
+                            "Keyword Id",
+                            "Product Targeting Id",
+                            "Campaign Name",
+                            "Ad Group Name",
+                            "Start Date",
+                            "End Date",
+                            "Targeting Type",
+                            "State",
+                            "Daily Budget",
+                            "SKU",
+                            "ASIN",
+                            "Ad Group Default Bid",
+                            "Bid",
+                            "Keyword Text",
+                            "Match Type",
+                            "Bidding Strategy",
+                            "Placement",
+                            "Percentage",
+                            "Product Targeting Expression"
+                        ];
+        
+        
+        
+        
+                    var obj =  {
+                            "Product":"",    
+                            "Entity":"",
+                            "Operation":"",
+                            "Campaign Id":"",
+                            "Ad Group Id":"",
+                            "Portfolio Id":"",
+                            "Ad Id":"",
+                            "Keyword Id":"",
+                            "Product Targeting Id":"",
+                            "Campaign Name":"",
+                            "Ad Group Name":"",
+                            "Start Date":"",
+                            "End Date":"",
+                            "Targeting Type":"",
+                            "State":"",
+                            "Daily Budget":"",
+                            "SKU":"",
+                            "ASIN":"",
+                            "Ad Group Default Bid":"",
+                            "Bid":"",
+                            "Keyword Text":"",
+                            "Match Type":"",
+                            "Bidding Strategy":"",
+                            "Placement":"",
+                            "Percentage":"",
+                            "Product Targeting Expression":""
+                        };
+        
+                        var data = e.target.result;
+                        var json =  JSON.parse(CSV2JSON(data));
+                        var fin_arr =  {};
+        
+                        $.each(json, function (k, v) {
+        
+                            $.each(v, function (k1, v1) {
+        
+                                if(!(fin_arr[k1])) { fin_arr[k1] = [] };
+        
+                                if(v1.length) { fin_arr[k1].push(v1) };
+        
+                            });
+                        });
+        
+                        var fin_CSV = [];
+        
+                        var i = 1;
+                        $.each(fin_arr, function (k, v) {
+        
+                            $.each(def_rows, function (k1, v1) {
+                                // var tmp = obj;
+                                fin_CSV.push({
+                                    "Product":"Sponsored products",    
+                                    "Entity":v1,
+                                    "Operation":"Create",
+                                    "Campaign Id":sel_Campaigns+i,
+                                    "Ad Group Id": (v1 != "Campaign") ? ad_grp+i : "",
+                                    "Portfolio Id":"",
+                                    "Ad Id":"",
+                                    "Keyword Id":"",
+                                    "Product Targeting Id":"",
+                                    "Campaign Name":(v1 == "Campaign") ? sel_Campaigns+i : "",
+                                    "Ad Group Name":(v1 == "Ad group") ? ad_grp+i : "",
+                                    "Start Date":(v1 == "Campaign") ? strt_dt : "", 
+                                    "End Date":"",
+                                    "Targeting Type":(v1 == "Campaign") ? trgt_type : "", 
+                                    "State":"Enabled",
+                                    "Daily Budget":(v1 == "Campaign") ? daily_budg : "",
+                                    "SKU":(v1 == "Product Ad") ? sku : "",
+                                    "ASIN":"",
+                                    "Ad Group Default Bid":(v1 == "Ad group") ? def_bid : "",
+                                    "Bid":"",
+                                    "Keyword Text":"",
+                                    "Match Type":"",
+                                    "Bidding Strategy":(v1 == "Campaign") ? bid_strg : "",
+                                    "Placement":placement,
+                                    "Percentage":percentage,
+                                    "Product Targeting Expression":""
+                                });
+                            });
+                                    // tmp.Entity = v1;
+                                    // fin_CSV.push(tmp);
+                                    // console.log(k1);
+                                    // fin_CSV.push(tmp);
+        
+                            $.each(v, function (k1, v1) {
+                                    // var tmp = obj;
+                                    // tmp.Entity = "Keyword";
+        
+                                    fin_CSV.push({
+                                    "Product":"Sponsored products",    
+                                    "Entity":"Keyword",
+                                    "Operation":"Create",
+                                    "Campaign Id":sel_Campaigns+i,
+                                    "Ad Group Id": (v1 != "Campaign") ? ad_grp+i : "",
+                                    "Portfolio Id":"",
+                                    "Ad Id":"",
+                                    "Keyword Id":"",
+                                    "Product Targeting Id":"",
+                                    "Campaign Name":"",
+                                    "Ad Group Name":"",
+                                    "Start Date":"",
+                                    "End Date":"",
+                                    "Targeting Type":"",
+                                    "State":"Enabled",
+                                    "Daily Budget":"",
+                                    "SKU":"",
+                                    "ASIN":"",
+                                    "Ad Group Default Bid":"",
+                                    "Bid":bid,
+                                    "Keyword Text":v1,
+                                    "Match Type":mat_type,
+                                    "Bidding Strategy":"",
+                                    "Placement":placement,
+                                    "Percentage":percentage,
+                                    "Product Targeting Expression":""
+                                });
+                            });
+        
+                            fin_CSV.push(obj);
+                            i++;
+        
+                        });
+        
+                        // console.log(fin_CSV);
+        
+                        // console.log(json);
+        
+                        JSONToCSVConvertor(fin_CSV,"",flds);
+                    }
+                    reader.readAsText($("#fileUploadp3")[0].files[0]);
+                } else {
+                    alert("This browser does not support HTML5.");
+                }
+            }
           }
       
           function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
@@ -321,13 +528,13 @@ function Home(props) {
                         <div className="col-lg-12">
                         <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li className="nav-item" role="presentation">
-                                <a className="nav-link active" id="pills-phase1-tab" data-toggle="pill" href="#pills-phase1" role="tab" aria-controls="pills-phase1" aria-selected="true">Phase 1</a>
+                                <a className="nav-link active" id="pills-phase1-tab" data-toggle="pill" href="#pills-phase1" role="tab" aria-controls="pills-phase1" aria-defaultValue="true">Phase 1</a>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <a className="nav-link" id="pills-phase2-tab" data-toggle="pill" href="#pills-phase2" role="tab" aria-controls="pills-phase2" aria-selected="false">Phase 2</a>
+                                <a className="nav-link" id="pills-phase2-tab" data-toggle="pill" href="#pills-phase2" role="tab" aria-controls="pills-phase2" aria-defaultValue="false">Phase 2</a>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <a className="nav-link" id="pills-phase3-tab" data-toggle="pill" href="#pills-phase3" role="tab" aria-controls="pills-phase3" aria-selected="false">Phase 4</a>
+                                <a className="nav-link" id="pills-phase3-tab" data-toggle="pill" href="#pills-phase3" role="tab" aria-controls="pills-phase3" aria-defaultValue="false">Phase 4</a>
                             </li>
                             </ul>
                             <div className="tab-content" id="pills-tabContent">
@@ -374,8 +581,8 @@ function Home(props) {
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
                                             <label htmlFor="sel_type">Select Type</label>
-                                                <select id="sel_type" className="form-control">
-                                                    <option selected>Choose type</option>
+                                                <select id="sel_type" className="form-control" value={targetType} onChange={(event) => setTargetType(event.target.value)}>
+                                                    <option defaultValue>Choose type</option>
                                                     <option value="Manual">Manual</option>
                                                     <option value="Automation">Automation</option>
                                                 </select>
@@ -383,7 +590,7 @@ function Home(props) {
                                             <div className="form-group col-md-6">
                                             <label htmlFor="sel_Campaigns">Select Campaigns</label>
                                                 <select id="sel_Campaigns" className="form-control">
-                                                    <option selected>Choose Campaigns</option>
+                                                    <option defaultValue>Choose Campaigns</option>
                                                     <option value="Sponsored Products Campaigns">Sponsored Products Campaigns</option>
                                                     <option value="Sponsored Display Campaigns">Sponsored Display Campaigns</option>
                                                     <option value="Sponsored Brands Campaigns">Sponsored Brands Campaigns</option>
@@ -392,37 +599,37 @@ function Home(props) {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="cam_name">Enter Campaign Name</label>
-                                            <input type="text" className="form-control" id="cam_name" placeholder="Enter Campaign Name"/>
+                                            <input type="text" className="form-control" id="cam_name" value={camName} onChange={(event) => setCamName(event.target.value)} placeholder="Enter Campaign Name"/>
                                         </div>
                                         <div className="form-row">
                                             <div className="form-group col-lg-6">
-                                                <label htmlFor="daily_budg">Enter Daily Budget</label>
-                                                <input type="text" className="form-control" id="daily_budg" placeholder="Enter Daily Budget"/>
+                                                <label htmlFor="ad_grp">Enter Ad Group</label>
+                                                <input type="text" className="form-control" id="ad_grp" value={adGropup} onChange={(event) => setAdGropup(event.target.value)} placeholder="Enter Ad Group"/>
                                             </div>
                                             <div className="form-group col-lg-6">
-                                                <label htmlFor="ad_grp">Enter Ad Group</label>
-                                                <input type="text" className="form-control" id="ad_grp" placeholder="Enter Ad Group"/>
+                                                <label htmlFor="daily_budg">Enter Daily Budget</label>
+                                                <input type="text" className="form-control" id="daily_budg" value={dailyBudg} onChange={(event) => setDailyBudg(event.target.value)} placeholder="Enter Daily Budget"/>
                                             </div>
                                         </div>
                                         <div className="form-row">
                                             <div className="form-group col-lg-4">
                                                 <label htmlFor="sku">Enter SKU</label>
-                                                <input type="text" className="form-control" id="sku" placeholder="Enter SKU"/>
+                                                <input type="text" className="form-control" id="sku" value={skuRate} onChange={(event) => setSkuRate(event.target.value)} placeholder="Enter SKU"/>
                                             </div>
                                             <div className="form-group col-lg-4">
                                                 <label htmlFor="def_bid">Enter Ad Group Default Bid</label>
-                                                <input type="text" className="form-control" id="def_bid" placeholder="Enter Ad Group"/>
+                                                <input type="text" className="form-control" id="def_bid" value={defBid} onChange={(event) => setDefBid(event.target.value)} placeholder="Enter Ad Group"/>
                                             </div>
                                             <div className="form-group col-lg-4">
                                                 <label htmlFor="bid">Enter Default Bid</label>
-                                                <input type="text" className="form-control" id="bid" placeholder="Enter Default Bid"/>
+                                                <input type="text" className="form-control" id="bid" value={bidRate} onChange={(event) => setBidRate(event.target.value)} placeholder="Enter Default Bid"/>
                                             </div>
                                         </div>
                                         <div className="form-row">
                                             <div className="form-group col-lg-4">
                                                 <label htmlFor="mat_type">Select Match Type</label>
-                                                <select id="mat_type" className="form-control">
-                                                        <option selected>Choose Match Type</option>
+                                                <select id="mat_type" className="form-control" value={matchType} onChange={(event) => setMatchType(event.target.value)}>
+                                                        <option defaultValue>Choose Match Type</option>
                                                         <option value="Broad">Broad</option>
                                                         <option value="Exact">Exact</option>
                                                         <option value="Phrase">Phrase</option>
@@ -430,8 +637,8 @@ function Home(props) {
                                             </div>
                                             <div className="form-group col-lg-4">
                                                 <label htmlFor="bid_strg">Select Bidding Strategy</label>
-                                                    <select id="bid_strg" className="form-control">
-                                                        <option selected>Choose Bidding Strategy</option>
+                                                    <select id="bid_strg" className="form-control" value={bidStrgy} onChange={(event) => setBidStrgy(event.target.value)}>
+                                                        <option defaultValue>Choose Bidding Strategy</option>
                                                         <option value="Broad">Fixed Bid</option>
                                                         <option value="Exact">Dynamic Bid(downword only)</option>
                                                         <option value="Phrase">Dynamic Bid(Upword only)</option>
@@ -439,8 +646,8 @@ function Home(props) {
                                             </div>
                                             <div className="form-group col-lg-4">
                                                 <label htmlFor="placement">Select Placement</label>
-                                                <select id="placement" className="form-control">
-                                                    <option selected>Choose Placement</option>
+                                                <select id="placement" className="form-control" value={placementName} onChange={(event) => setPlacementName(event.target.value)}>
+                                                    <option defaultValue>Choose Placement</option>
                                                     <option value="Top Search">Top Search</option>
                                                     <option value="product Search">Product Search</option>
                                                 </select>
@@ -449,13 +656,13 @@ function Home(props) {
                                       
                                         <div className="form-group">
                                             <label htmlFor="percentage">Enter Percentage</label>
-                                            <input type="text" className="form-control" id="percentage" placeholder="Enter Percentage"/>
+                                            <input type="text" className="form-control" id="percentage"  value={percentageNo} onChange={(event) => setPercentageNo(event.target.value)} placeholder="Enter Percentage"/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="exampleInputPassword1">Enter CSV Url</label>
                                             <div className="custom-file">
-                                                <input type="file" className="custom-file-input" id="fileUploadp4" onChange={getPhase4FIleName}/>
-                                                <label className="custom-file-label custom-file-labelp4" htmlFor="fileUploadp4">Choose file</label>
+                                                <input type="file" className="custom-file-input" id="fileUploadp3" onChange={getPhase4FIleName}/>
+                                                <label className="custom-file-label custom-file-labelp4" htmlFor="fileUploadp3">Choose file</label>
                                                 <button type="button" id="uploadp4" onClick={getPhase4Data} className="btn btn-sm btn-success my-3">Generate CSV File</button>
                                                 <div id="dvCSV">
                                                 </div>
