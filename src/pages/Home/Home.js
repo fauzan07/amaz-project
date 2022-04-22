@@ -164,7 +164,7 @@ function Home(props) {
                               JSONToCSVConvertor(fin_arr,"",["Phrase","Count","Strength"]);
                             //   console.log(count,strnt);
                             // alert()
-                            // window.location.reload();
+                            window.location.reload();
                           }
                           reader.readAsText($("#fileUpload")[0].files[0]);
                       } else {
@@ -385,10 +385,10 @@ function Home(props) {
                                     "Ad Group Default Bid":(v1 == "Ad group") ? def_bid : "",
                                     "Bid":"",
                                     "Keyword Text":"",
-                                    "Match Type":(v1 == "Campaign") ? matchType : "",
+                                    "Match Type":"",
                                     "Bidding Strategy":(v1 == "Campaign") ? bid_strg : "",
-                                    "Placement":placement,
-                                    "Percentage":percentage,
+                                    "Placement":(v1 == "Campaign") ? placement : "",
+                                    "Percentage":(v1 == "Campaign") ? percentage : "",
                                     "Product Targeting Expression":""
                                 });
                             });
@@ -423,10 +423,10 @@ function Home(props) {
                                     "Ad Group Default Bid":"",
                                     "Bid":bid,
                                     "Keyword Text":v1,
-                                    "Match Type":"",
+                                    "Match Type":mat_type,
                                     "Bidding Strategy":"",
-                                    "Placement":placement,
-                                    "Percentage":percentage,
+                                    "Placement":"",
+                                    "Percentage":"",
                                     "Product Targeting Expression":""
                                 });
                             });
@@ -441,6 +441,7 @@ function Home(props) {
                         // console.log(json);
         
                         JSONToCSVConvertor(fin_CSV,"",flds);
+                        window.location.reload();
                     }
                     reader.readAsText($("#fileUploadp3")[0].files[0]);
                 } else {
