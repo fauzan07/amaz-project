@@ -109,15 +109,15 @@ function Home(props) {
             //   $("#upload").bind("click", function () {
                 const getPhase1Data = () => {
                   var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-                  if (regex.test($("#fileUpload").val().toLowerCase())) {
+                //   if (regex.test($("#fileUpload").val().toLowerCase())) {
                       if (typeof (FileReader) != "undefined") {
                           var reader = new FileReader();
                           reader.onload = function (e) {
-                              // console.log(e.target.result);
+                              console.log(e.target.result);
                               var data = e.target.result;
                               var phrs = "baby";
                               var json =  JSON.parse(CSV2JSON(data));
-                              //   console.log(json);
+                            //   console.log(json);
                               var count = 0;
                               var strnt = 0;
                               let words = [];
@@ -164,22 +164,22 @@ function Home(props) {
                               JSONToCSVConvertor(fin_arr,"",["Phrase","Count","Strength"]);
                             //   console.log(count,strnt);
                             // alert()
-                            window.location.reload();
+                            // window.location.reload();
                           }
                           reader.readAsText($("#fileUpload")[0].files[0]);
                       } else {
                           alert("This browser does not support HTML5.");
                       }
-                  } else {
-                      alert("Please upload a valid CSV file.");
-                  }
+                //   } else {
+                //       alert("Please upload a valid CSV file.");
+                //   }
               }
       
         //   $(document).on('click','#uploadp2',function(){
             const getPhase2Data = () => {
 
-                  var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-                  if (regex.test($("#fileUploadp2").val().toLowerCase())) {
+                //   var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                //   if (regex.test($("#fileUploadp2").val().toLowerCase())) {
                       if (typeof (FileReader) != "undefined") {
       
                           var reader = new FileReader();
@@ -229,9 +229,9 @@ function Home(props) {
                       } else {
                           alert("This browser does not support HTML5.");
                       }
-                  } else {
-                      alert("Please upload a valid CSV file.");
-                  }
+                //   } else {
+                //       alert("Please upload a valid CSV file.");
+                //   }
           }
 
           const [camName, setCamName] = useState("");
@@ -268,8 +268,12 @@ function Home(props) {
                         var bid_strg = bidStrgy;
                         var placement = placementName;
                         var percentage = percentageNo;
-                        var strt_dt = "20220414";
-        
+                        var strt_dt = (new Date()).toISOString().split('T')[0];
+                        // var strt_dt = "20220414";
+                        strt_dt = strt_dt.replaceAll("-", "");
+
+                        console.log(strt_dt);
+
                         var def_rows = [
                             "Campaign",
                             "Ad group",
@@ -381,7 +385,7 @@ function Home(props) {
                                     "Ad Group Default Bid":(v1 == "Ad group") ? def_bid : "",
                                     "Bid":"",
                                     "Keyword Text":"",
-                                    "Match Type":"",
+                                    "Match Type":(v1 == "Campaign") ? matchType : "",
                                     "Bidding Strategy":(v1 == "Campaign") ? bid_strg : "",
                                     "Placement":placement,
                                     "Percentage":percentage,
@@ -419,7 +423,7 @@ function Home(props) {
                                     "Ad Group Default Bid":"",
                                     "Bid":bid,
                                     "Keyword Text":v1,
-                                    "Match Type":mat_type,
+                                    "Match Type":"",
                                     "Bidding Strategy":"",
                                     "Placement":placement,
                                     "Percentage":percentage,
@@ -621,7 +625,7 @@ function Home(props) {
                                                 <input type="text" className="form-control" id="def_bid" value={defBid} onChange={(event) => setDefBid(event.target.value)} placeholder="Enter Ad Group"/>
                                             </div>
                                             <div className="form-group col-lg-4">
-                                                <label htmlFor="bid">Enter Default Bid</label>
+                                                <label htmlFor="bid">Enter Bid</label>
                                                 <input type="text" className="form-control" id="bid" value={bidRate} onChange={(event) => setBidRate(event.target.value)} placeholder="Enter Default Bid"/>
                                             </div>
                                         </div>
@@ -639,9 +643,9 @@ function Home(props) {
                                                 <label htmlFor="bid_strg">Select Bidding Strategy</label>
                                                     <select id="bid_strg" className="form-control" value={bidStrgy} onChange={(event) => setBidStrgy(event.target.value)}>
                                                         <option defaultValue>Choose Bidding Strategy</option>
-                                                        <option value="Broad">Fixed Bid</option>
-                                                        <option value="Exact">Dynamic Bid(downword only)</option>
-                                                        <option value="Phrase">Dynamic Bid(Upword only)</option>
+                                                        <option value="Fixed Bid">Fixed Bid</option>
+                                                        <option value="Dynamic Bid(downword only)">Dynamic Bid(downword only)</option>
+                                                        <option value="Dynamic Bid(Upword only)">Dynamic Bid(Upword only)</option>
                                                     </select>
                                             </div>
                                             <div className="form-group col-lg-4">
@@ -649,7 +653,7 @@ function Home(props) {
                                                 <select id="placement" className="form-control" value={placementName} onChange={(event) => setPlacementName(event.target.value)}>
                                                     <option defaultValue>Choose Placement</option>
                                                     <option value="Top Search">Top Search</option>
-                                                    <option value="product Search">Product Search</option>
+                                                    <option value="Product Search">Product Search</option>
                                                 </select>
                                             </div>
                                         </div>
